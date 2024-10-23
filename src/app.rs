@@ -1,3 +1,4 @@
+use crate::markdown;
 use crossterm::event::KeyEvent;
 use std::fs;
 
@@ -17,7 +18,7 @@ impl App {
         })
     }
 
-    pub fn handle_input(&mut self, key: KeyEvent) {
+    pub fn handle_input(&mut self, _key: KeyEvent) {
         // TODO: handle this later
     }
 

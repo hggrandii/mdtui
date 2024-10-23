@@ -9,15 +9,15 @@ pub fn parse_markdown(content: &str) -> Vec<String> {
 
 pub fn print_ast<'a>(node: &'a AstNode<'a>, indent: usize) {
     let indent_str = " ".repeat(indent);
-    println!("{}{:?}", indent_str, node_data.borrow().value);
-    for child in node_children() {
+    println!("{}{:?}", indent_str, node.data.borrow().value);
+    for child in node.children() {
         print_ast(child, indent + 2);
     }
 }
 
-pub fn extract_todos<'a>(node: &'a AstNode<'a>) -> Vec<String> {
+fn extract_todos<'a>(node: &'a AstNode<'a>) -> Vec<String> {
     let mut todos = Vec::new();
-    for child in node_children() {
+    for child in node.children() {
         match &child.data.borrow().value {
             NodeValue::Paragraph => {
                 for grandchild in child.children() {

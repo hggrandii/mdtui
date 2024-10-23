@@ -1,7 +1,7 @@
 use crate::app::App;
 
 use tui::backend::Backend;
-use tui::layout::{Constraints, Direction, Layout};
+use tui::layout::{Constraint, Direction, Layout};
 use tui::widgets::{Block, Borders, List, ListItem};
 use tui::Frame;
 
