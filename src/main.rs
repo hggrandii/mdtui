@@ -17,7 +17,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let backend = CrosstermBackend::new(stdout);
     let mut terminal = Terminal::new(backend)?;
 
-    let mut app = App::new("todos.md")?;
+    let mut app = App::default();
 
     loop {
         terminal.draw(|rect| ui::draw(rect, &app))?;
@@ -25,7 +25,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         if event::poll(std::time::Duration::from_millis(200))? {
             if let event::Event::Key(key) = event::read()? {
                 match key.code {
-                    KeyCode::Char('q') => break,
+                    KeyCode::Char('q') => {
+                        if !app.is_input_mode() {
+                            break;
+                        }
+                    }
                     _ => app.handle_input(key),
                 }
             }
